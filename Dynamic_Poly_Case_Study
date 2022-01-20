@@ -1,0 +1,138 @@
+using System;
+
+namespace case_study__3
+{
+    public interface Person
+    {
+         void GetDetails();
+         void SetDetails();
+    }
+
+    public class Engineer : Person
+    {
+        string fname;
+        string lname;
+        string dept;
+        public void SetDetails()
+        {
+            Console.WriteLine("Enter First Name:");
+            this.fname = Console.ReadLine();
+
+            Console.WriteLine("Enter Last Name:");
+            this.lname = Console.ReadLine();
+
+            Console.WriteLine("Enter Dept:");
+            this.dept = Console.ReadLine();
+        }
+
+        public void GetDetails()
+        {
+            Console.WriteLine(" First Name:" + this.fname);
+
+            Console.WriteLine("Last Name:" + this.lname);
+
+            Console.WriteLine("Dept:" + this.dept);
+
+            Salary s = new Salary();
+
+            s.CalculateSalary(this);
+        }
+    }
+
+    public class Worker : Person
+    {
+        string fname;
+        string lname;
+        string dept;
+        public void SetDetails()
+        {
+            Console.WriteLine("Enter First Name:");
+            this.fname = Console.ReadLine();
+
+            Console.WriteLine("Enter Last Name:");
+            this.lname = Console.ReadLine();
+
+            Console.WriteLine("Enter Dept:");
+            this.dept = Console.ReadLine();
+        }
+
+        public void GetDetails()
+        {
+            Console.WriteLine(" First Name:" + this.fname);
+
+            Console.WriteLine("Last Name:" + this.lname);
+
+            Console.WriteLine("Dept:" + this.dept);
+
+            Salary s = new Salary();
+
+            s.CalculateSalary(this);
+        }
+    }
+
+    public class Trainee : Person
+    {
+        string fname;
+        string lname;
+        string dept;
+        public void SetDetails()
+        {
+            Console.WriteLine("Enter First Name:");
+            this.fname = Console.ReadLine();
+
+            Console.WriteLine("Enter Last Name:");
+            this.lname = Console.ReadLine();
+
+            Console.WriteLine("Enter Dept:");
+            this.dept = Console.ReadLine();
+        }
+
+        public void GetDetails()
+        {
+            Console.WriteLine(" First Name:" + this.fname);
+
+            Console.WriteLine("Last Name:" + this.lname);
+
+            Console.WriteLine("Dept:" + this.dept);
+
+            Salary s = new Salary();
+
+            s.CalculateSalary(this);
+        }
+    }
+
+    public class Salary
+    {
+        public void CalculateSalary(Person p)
+        {
+            if (p is Engineer)
+                Console.WriteLine("Engineer's Salary");
+            if (p is Worker)
+                Console.WriteLine("Worker's Salary");
+            if (p is Trainee)
+                Console.WriteLine("Trainee's Salary");
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Engineer e = new Engineer();
+
+            e.SetDetails();
+
+            Worker w = new Worker();
+
+            w.SetDetails();
+
+            Trainee t = new Trainee();
+
+            t.SetDetails();
+
+            e.GetDetails();
+            w.GetDetails();
+            t.GetDetails();
+        }
+    }
+}
