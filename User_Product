@@ -1,0 +1,84 @@
+using System;
+namespace Case
+{
+
+    public abstract class Employee
+    {
+        public string EmployeeName, Department, Designation;
+        public Salary salary = new Salary();
+
+        public abstract void setDetails(string a, int b, int c, int d, int e, int f, int g);
+        public class Salary
+        {
+            public int Basic, Da, Hra, Pf, Gross, Net;
+        }
+        public class Manager : Employee
+        {
+            public override void setDetails(string a, int b, int c, int d, int e, int f, int g)
+            {
+                this.EmployeeName = a;
+                this.Department = "Business";
+                this.Designation = "Manager";
+                this.salary.Basic = b;
+                this.salary.Da = c;
+                this.salary.Hra = d;
+                this.salary.Pf = e;
+                this.salary.Gross = f;
+                this.salary.Net = g;
+            }
+        }
+        public class Engineer : Employee
+        {
+            public override void setDetails(string a, int b, int c, int d, int e, int f, int g)
+            {
+                this.EmployeeName = a;
+                this.Department = "Software";
+                this.Designation = "Engineer";
+                this.salary.Basic = b;
+                this.salary.Da = c;
+                this.salary.Hra = d;
+                this.salary.Pf = e;
+                this.salary.Gross = f;
+                this.salary.Net = g;
+            }
+        }
+        public class LineStaff : Employee
+        {
+            public override void setDetails(string a, int b, int c, int d, int e, int f, int g)
+            {
+                this.EmployeeName = a;
+                this.Department = "Hardware";
+                this.Designation = "Linestaff";
+                this.salary.Basic = b;
+                this.salary.Da = c;
+                this.salary.Hra = d;
+                this.salary.Pf = e;
+                this.salary.Gross = f;
+                this.salary.Net = g;
+            }
+        }
+        internal class Sales
+        {
+
+            static void Main(string[] args)
+            {
+                Manager m = new Manager();
+                m.setDetails("Lama", 20, 25, 30, 35, 40, 45);
+                Console.WriteLine($"The name of employee is: {m.EmployeeName}\n The department is: {m.Department}\n The designation is: {m.Designation}\n The basic is: {m.salary.Basic}\n The da is: {m.salary.Da}\n The HRA is: {m.salary.Hra}\n The PF is: {m.salary.Pf}\n The Gross is: {m.salary.Gross}\n The net is: {m.salary.Net}");
+                Engineer e = new Engineer();
+                e.setDetails("Dan", 10, 20, 30, 40, 50, 60);
+                Console.WriteLine();
+                Console.WriteLine($"The name of employee is: { e.EmployeeName}\nThe department is: {e.Department}\nThe designation is: {e.Designation}\nThe basic is: {e.salary.Basic}\n The da is: {e.salary.Da}\n The HRA is: {e.salary.Hra}\n The PF is: {e.salary.Pf}\n The Gross is: {e.salary.Gross}\n The net is: {e.salary.Net}");
+                LineStaff l = new LineStaff();
+                l.setDetails("Hawk", 20, 40, 60, 80, 100, 120);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine($"The name of employee is: {l.EmployeeName}\nThe department is: {l.Department}\nThe designation is: {l.Designation}\nThe basic is: {l.salary.Basic}\n The da is: {l.salary.Da}\n The HRA is: {l.salary.Hra}\n The PF is: {l.salary.Pf}\n The Gross is: {l.salary.Gross}\n The net is: {l.salary.Net}");
+            }
+        }
+
+
+
+    }
+
+}
