@@ -1,0 +1,59 @@
+ internal class Program
+    {    
+       
+        
+       static void Main(string[] args)
+        {
+
+            int[] n = new int[10];
+            try
+            {
+                for (int i = 0; i < 11; i++)
+                {
+                    n[i] = i;
+                }
+
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("array exception completed!!");
+            }
+            try
+            {
+                Console.WriteLine("Enter username");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter passwrod");
+                string password = Console.ReadLine();
+                if (username.Length < 10 && password.Length < 6)
+                {
+                    throw new LengthException("username and password");
+                }
+                else if (password.Length < 6)
+                {
+                    throw new LengthException("password");
+                }
+                else if (username.Length < 10)
+                {
+                    throw new LengthException("username");
+                }
+                else
+                {
+                    Console.WriteLine("Every thing is fine");
+                }
+            }
+            catch (LengthException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("length exception completed");
+            }
+        }
+    }
+
+}
