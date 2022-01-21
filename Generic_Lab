@@ -1,0 +1,47 @@
+using System;
+namespace Testfile
+{
+    public class Product<T>
+    {
+        T[] product;
+        T[] producttype;
+        int size;
+        public Product(int size)
+        {
+            this.size = size;
+            product = new T[size];
+            producttype = new T[size];
+        }
+        public void PrintDetails()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                Console.WriteLine(product[i] + "," + producttype[i]);
+            }
+        }
+        public void AddProduct(T empname, int pos)
+        {
+            product[pos] = empname;
+        }
+        public void AddProductDetails(T dept, int pos)
+        {
+            producttype[pos] = dept;
+        }
+    }
+    internal class Program
+    { 
+    static void Main(string[] args)
+            {
+            Product<string> P = new Product<string>(3);
+                P.AddProduct("Candy", 0);
+                P.AddProduct("IceCream", 1);
+                P.AddProduct("sonpapdi", 2);
+                P.AddProductDetails("On Sale", 0);
+                P.AddProductDetails("50% off", 1);
+                P.AddProductDetails("Buy 2 get 1 free", 2);
+                P.PrintDetails();
+                Console.ReadKey();
+            }
+        }
+
+    }
