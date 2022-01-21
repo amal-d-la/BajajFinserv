@@ -1,16 +1,16 @@
 using System;
 namespace Testfile
 {
-    public class Product<T>
+    public class Product<T,E>
     {
         T[] product;
-        T[] producttype;
+        E[] producttype;
         int size;
         public Product(int size)
         {
             this.size = size;
             product = new T[size];
-            producttype = new T[size];
+            producttype = new E[size];
         }
         public void PrintDetails()
         {
@@ -23,7 +23,7 @@ namespace Testfile
         {
             product[pos] = empname;
         }
-        public void AddProductDetails(T dept, int pos)
+        public void AddProductDetails(E dept, int pos)
         {
             producttype[pos] = dept;
         }
@@ -32,10 +32,10 @@ namespace Testfile
     { 
     static void Main(string[] args)
             {
-            Product<string> P = new Product<string>(3);
+            Product<string,string> P = new Product<string,string>(3);
                 P.AddProduct("Candy", 0);
                 P.AddProduct("IceCream", 1);
-                P.AddProduct("sonpapdi", 2);
+                P.AddProduct("sonpapad", 2);
                 P.AddProductDetails("On Sale", 0);
                 P.AddProductDetails("50% off", 1);
                 P.AddProductDetails("Buy 2 get 1 free", 2);
