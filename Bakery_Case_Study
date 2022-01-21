@@ -1,0 +1,128 @@
+using System;
+
+namespace ConsoleApp14
+{
+    
+        public class Item
+        {
+            public string itemname;
+            public int price, quantity;
+            public Item(string name, int price, int qty)
+            {
+                this.itemname = name;
+                this.price = price;
+                this.quantity = qty;
+            }
+        }
+        public class Menu
+        {
+            public void displayItems(Item[] items)
+            {
+                for (int i = 0; i < items.Length; i++)
+                {
+                    Console.WriteLine($"press {i + 1} to selcet this item {items[i].itemname}");
+                }
+
+            }
+        }
+        public class Order
+        {
+            private Item[] itemlist = new Item[5];
+            private int k = 0;
+            private int totalAmount = 0;
+            public void addItemToOrder(Item item)
+            {
+                if (Array.IndexOf(this.itemlist, item) == -1)
+                {
+                    this.itemlist[k++] = item;
+                    Console.WriteLine("Added!");
+                }
+                else
+                {
+                    this.itemlist[Array.IndexOf(this.itemlist, item)].quantity++;
+                }
+            }
+            public void DisplayTotalAmount()
+            {
+                Console.WriteLine($"S.No--------Name----------Quantity-------Price---------Total");
+                string sb = "";
+                for (int i = 0; i < 49; i++)
+                {
+                    sb += "-";
+                }
+                Console.WriteLine(sb);
+                for (int i = 0; i < this.k; i++)
+                {
+                    this.totalAmount += this.itemlist[i].price * this.itemlist[i].quantity;
+                    Console.WriteLine($"{i + 1}              {this.itemlist[i].itemname}          {this.itemlist[i].quantity}     {this.itemlist[i].price}     {this.itemlist[i].price * this.itemlist[i].quantity}");
+
+                }
+                Console.WriteLine();
+                Console.WriteLine($"The total bill amount is {this.totalAmount} for your order");
+            }
+        }
+        internal class Program
+
+        {
+            int done = 0;
+            public void orderConfirm(Order order)
+            {
+                Console.WriteLine("To Confirm press: 1\nTo revert Press: other");
+                int ch = Convert.ToInt32(Console.ReadLine());
+                switch (ch)
+                {
+                    case 1:
+                        order.DisplayTotalAmount();
+                        this.done = 1;
+                        break;
+                    default:
+                        Console.WriteLine("No issues");
+                        break;
+                }
+            }
+
+
+            static void Main(string[] args)
+            {
+                Program p = new Program();
+
+                Item[] items = new Item[5];
+                items[0] = new Item("Cake", 20, 1);
+                items[1] = new Item("Biscuit", 25, 1);
+                items[2] = new Item("Lays", 10, 1);
+                items[3] = new Item("Sweet", 20, 1);
+                items[4] = new Item("Coke", 25, 1);
+
+                Menu menu = new Menu();
+                Order order = new Order();
+                int ch, choice;
+
+                while (true)
+                {
+                    Console.WriteLine("To Add Item Press: 1\nTo checkout Press:2\nTo Exit Press: 3");
+                    ch = Convert.ToInt32(Console.ReadLine());
+                    switch (ch)
+                    {
+                        case 1:
+                            menu.displayItems(items);
+                            choice = Convert.ToInt32(Console.ReadLine());
+                            order.addItemToOrder(items[choice - 1]);
+                            break;
+                        case 2:
+                            p.orderConfirm(order);
+                            break;
+                        case 3:
+                            p.done = 1;
+                            break;
+                        default:
+                            Console.WriteLine("Plesae enter a valid number!!");
+                            break;
+                    }
+                    if (p.done == 1) break;
+                }
+
+            }
+        }
+
+    }
+
