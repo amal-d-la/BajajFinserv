@@ -1,0 +1,51 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace FilehandlingCaseStudy2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            bool condition = true;
+            while (condition)
+            {
+                Console.WriteLine("Menu\n\n To Check File --> 1 \n To Copy File --> 1 \n To Rename File --> 1 \n To exit --> 0");
+                int input = Convert.ToInt32(Console.ReadLine());
+                switch (input)
+                {
+                    case 0:
+                        condition = false; break;
+                    case 1:
+                        Console.WriteLine("Enter file path:");
+                        string path = Console.ReadLine();
+                        if (File.Exists(path))
+                            Console.WriteLine("File exists.");
+                        else
+                            Console.WriteLine("File does not exist.");
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the Source path:");
+                            string source = Console.ReadLine();
+                        Console.WriteLine("Enter the destination path:");
+                        string destination = Console.ReadLine();
+                        File.Copy(source, destination, true);
+                        Console.WriteLine("File Moved");
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the path of file to be renamed");
+                        string name=Console.ReadLine();
+                        Console.WriteLine("New name:");
+                        string Rename=Console.ReadLine();
+                        File.Move(name, Rename);
+                        Console.WriteLine("Renamed");
+                        break;
+                     
+                }
+
+            }
+        }
+
+    }
+}
