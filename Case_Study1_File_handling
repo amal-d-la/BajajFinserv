@@ -1,0 +1,38 @@
+using System;
+using System.IO;
+
+namespace CaseStudyFileHandling
+{
+    public class Employee
+    {
+        public string Empname, Dept,Email;
+        public Employee(string name,string dept,string email)
+        {
+            this.Empname = name;
+            this.Dept = dept;
+            this.Email=email;
+        }
+        public void AddDetails()
+        {
+            StreamWriter sw = new StreamWriter("C:\\Users\\Amalajay\\Documents\\myfile.txt");
+            sw.WriteLine($"Employee Name:{this.Empname}, Department:{this.Dept}, Email:{this.Email}");
+            sw.Flush();
+            sw.Close(); 
+        }
+        public void FileView()
+        {
+            StreamReader sr = new StreamReader("C:\\Users\\Amalajay\\Documents\\myfile.txt");
+            Console.Write(sr.ReadToEnd());
+            sr.Close();
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee e=new Employee("Jack","IT","jackwiz1010@gmail.com");
+            e.AddDetails();
+            e.FileView();
+        }
+    }
+}
