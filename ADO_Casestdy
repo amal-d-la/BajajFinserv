@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace ADOCseStudy
+{
+    public class User
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+        public User(SqlConnection c)
+        {
+            this.con = c;
+        }
+        public void InsertUser()
+        {
+            this.cmd = new SqlCommand("insert into users values(@username,@email,@password)", this.con);
+            this.cmd.Parameters.Add("@username", SqlDbType.VarChar);
+            this.cmd.Parameters.Add("@email", SqlDbType.VarChar);
+            this.cmd.Parameters.Add("@password", SqlDbType.VarChar);
+            Console.WriteLine("Please enter the Username:");
+            cmd.Parameters["@username"].Value = Console.ReadLine();
+            Console.WriteLine("Please enter the Email:");
+            cmd.Parameters["@email"].Value = Console.ReadLine();
+            Console.WriteLine("Please enter the Password:");
+            cmd.Parameters["@password"].Value = Console.ReadLine();
+            cmd.ExecuteNonQuery();
+            Console.WriteLine("User Created successfully!");
+
+        }
+        public void Login()
+        {
+            this.cmd = new SqlCommand("select username,password from users where username=@uname and password=@pass", this.con);
+            this.cmd.Parameters.Add("@uname", SqlDbType.VarChar);
+            this.cmd.Parameters.Add("@pass", SqlDbType.VarChar);
+
+            Console.WriteLine("Please enter the Username:");
+            cmd.Parameters["@uname"].Value = Console.ReadLine();
+
+            Console.WriteLine("Please enter the Password:");
+            cmd.Parameters["@pass"].Value = Console.ReadLine();
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.Read()) { 
+                Console.WriteLine("User is Auyhenticated :)"); }
+            else {
+                Console.WriteLine("Invaild User!!");}
+            dr.Close();
+
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\amalajay\Documents\TestDB.mdf;Integrated Security=True;Connect Timeout=30");
+            con.Open();
+            User u = new User(con);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("create table users(username varchar(20) primary key,email varchar(30),password varchar(15))", con);
+                cmd.ExecuteNonQuery();
+                int c;
+                bool bre = false;
+                while (true)
+                {
+                    Console.WriteLine("\nTo Register: 1\nTo Login: 2");
+                    c = Convert.ToInt32(Console.ReadLine());
+                    switch (c)
+                    {
+                        case 1:
+                            u.InsertUser();
+                            break;
+                        case 2:
+                            u.Login();
+                            break;
+                        case 3:
+                            bre = true;
+                            break;
+                    }
+                    if (bre) break;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
