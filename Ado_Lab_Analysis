@@ -1,0 +1,26 @@
+Inventory:
+products:List<Product>
+StockLeft:int
+
+Product:
+Pname:string
+Pdetails:string
+Sdetails:sales
+leftStock:int
+
+
+Purchase:
+Dateofpurchase:List<DateTime>
+DateofReturn:List<DateTime>
+Purcasepending:int
+
+Sales
+DateOfSales:List<DateTime>
+DateOfReturn:List<DateTime>
+PendingSales:int
+SalesAfterReturn:int
+
+product and purchases are aggregation
+product and sales are aggregation
+Purchases and Sales are association
+inventory and product are aggregation
