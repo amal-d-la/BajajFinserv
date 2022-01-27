@@ -1,0 +1,59 @@
+using System;
+using System.Linq;
+namespace LinQ
+{
+    class Employee
+    {
+        string name, dept;
+        float salary;
+        public Employee(string name, string dept, float salary)
+        {
+            this.name = name;
+            this.dept = dept;
+            this.salary = salary;
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public string Dept
+        {
+            get { return dept; }
+            set { dept = value; }
+        }
+        public float Salary
+        {
+            get { return salary; }
+            set { salary = value; }
+        }
+        internal class Program
+        {
+            static void Main(string[] args)
+            {
+                List<Employee> employees = new List<Employee>();
+                employees.Add(new Employee("Larson", "IT", 20000));
+                employees.Add(new Employee("Castor", "Tech", 15000));
+                employees.Add(new Employee("Jackson", "Mech", 10000));
+                employees.Add(new Employee("Castor", "Tech", 25000));
+
+                var a = from emp in employees
+                        where emp.salary > 15000
+                        select emp;
+
+                foreach (Employee emp in a)
+                {
+                    Console.WriteLine(emp.name + " " + emp.dept + " " + emp.salary);
+                }
+
+                var b = from empe in employees
+                        where empe.name.Length < 4
+                        select empe;
+                foreach (Employee emp in b)
+                {
+                    Console.WriteLine(emp.name + " " + emp.dept + " " + emp.salary);
+                }
+            }
+        }
+    }
+}
